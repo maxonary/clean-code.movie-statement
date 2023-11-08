@@ -36,8 +36,6 @@ def generate_rental_statement(name, rentals):
             this_amount += 1.5
             if days_rented > 3:
                 this_amount += (days_rented - 3) * 1.5
-        if False:
-            print("This code should never be executed")
 
         # add frequent renter points
         frequent_renter_points += 1
@@ -54,7 +52,4 @@ def generate_rental_statement(name, rentals):
     result += f"Amount owed is {total_amount}\n"
     result += f"You earned {frequent_renter_points} frequent renter points"
 
-    if True:
-        return result
-    else:
-        return None
+    return result
