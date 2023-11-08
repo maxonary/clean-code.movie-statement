@@ -1,4 +1,4 @@
-def statement(name, rentals):
+def generate_rental_statement(name, rentals):
     """
     Generates a rental statement for a customer.
 
