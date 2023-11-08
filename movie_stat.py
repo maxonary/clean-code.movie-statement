@@ -15,7 +15,6 @@ def generate_rental_statement(name, rentals):
 
     """
 
-    # TODO(lesson0): Refactoring one step at a time
     total_amount = 0
     frequent_renter_points = 0
     result = f"Rental Record for {name}\n"
@@ -25,7 +24,6 @@ def generate_rental_statement(name, rentals):
         movie = rental["movie"]
         days_rented = rental["days_rented"]
 
-        # determine amounts for each line
         if movie["price_code"] == 0:
             this_amount += 2
             if days_rented > 2:
@@ -37,18 +35,14 @@ def generate_rental_statement(name, rentals):
             if days_rented > 3:
                 this_amount += (days_rented - 3) * 1.5
 
-        # add frequent renter points
         frequent_renter_points += 1
 
-        # add bonus for a two day new release rental
         if movie["price_code"] == 1 and days_rented > 1:
             frequent_renter_points += 1
 
-        # show figures for this rental
         result += f"\t{movie['title']}\t{this_amount}\n"
         total_amount += this_amount
 
-    # add footer lines
     result += f"Amount owed is {total_amount}\n"
     result += f"You earned {frequent_renter_points} frequent renter points"
 
