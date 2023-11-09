@@ -29,6 +29,12 @@ def calculate_children_amount(days_rented):
         amount += (days_rented - 3) * CHILDREN_EXTRA_DAYS_COST
     return amount
 
+def calculate_dubbed_amount(days_rented):
+    amount = DUBBED_BASE_PRICE
+    if days_rented > 1:
+        amount += (days_rented - 1) * DUBBED_EXTRA_DAYS_COST
+    return amount
+
 def calculate_amount(movie_price_code, days_rented):
     if movie_price_code == REGULAR_PRICE_CODE:
         return calculate_regular_amount(days_rented)
