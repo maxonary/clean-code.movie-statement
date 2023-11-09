@@ -1,3 +1,15 @@
+REGULAR_PRICE_CODE = 0
+NEW_RELEASE_PRICE_CODE = 1
+CHILDREN_PRICE_CODE = 2
+
+REGULAR_BASE_PRICE = 2
+REGULAR_EXTRA_DAYS_COST = 1.5
+
+NEW_RELEASE_PRICE_PER_DAY = 3
+
+CHILDREN_BASE_PRICE = 1.5
+CHILDREN_EXTRA_DAYS_COST = 1.5
+
 def generate_rental_statement(name, rentals):
     """
     Generates a rental statement for a customer.
@@ -24,20 +36,20 @@ def generate_rental_statement(name, rentals):
         movie = rental["movie"]
         days_rented = rental["days_rented"]
 
-        if movie["price_code"] == 0:
-            this_amount += 2
+        if movie["price_code"] == REGULAR_PRICE_CODE:
+            this_amount += REGULAR_BASE_PRICE
             if days_rented > 2:
-                this_amount += (days_rented - 2) * 1.5
-        elif movie["price_code"] == 1:
-            this_amount += days_rented * 3
+                this_amount += (days_rented - 2) * REGULAR_EXTRA_DAYS_COST
+        elif movie["price_code"] == NEW_RELEASE_PRICE_CODE:
+            this_amount += days_rented * NEW_RELEASE_PRICE_PER_DAY
         else:
-            this_amount += 1.5
+            this_amount += CHILDREN_BASE_PRICE
             if days_rented > 3:
-                this_amount += (days_rented - 3) * 1.5
+                this_amount += (days_rented - 3) * CHILDREN_EXTRA_DAYS_COST
 
         frequent_renter_points += 1
 
-        if movie["price_code"] == 1 and days_rented > 1:
+        if movie["price_code"] == NEW_RELEASE_PRICE_CODE and days_rented > 1:
             frequent_renter_points += 1
 
         result += f"\t{movie['title']}\t{this_amount}\n"
