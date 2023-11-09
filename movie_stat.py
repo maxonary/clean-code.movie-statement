@@ -1,6 +1,7 @@
 REGULAR_PRICE_CODE = 0
 NEW_RELEASE_PRICE_CODE = 1
 CHILDREN_PRICE_CODE = 2
+DUBBED_PRICE_CODE = 3
 
 REGULAR_BASE_PRICE = 2
 REGULAR_EXTRA_DAYS_COST = 1.5
@@ -9,6 +10,9 @@ NEW_RELEASE_PRICE_PER_DAY = 3
 
 CHILDREN_BASE_PRICE = 1.5
 CHILDREN_EXTRA_DAYS_COST = 1.5
+
+DUBBED_BASE_PRICE = 4
+DUBBED_EXTRA_DAYS_COST = 1.5
 
 def calculate_regular_amount(days_rented):
     amount = REGULAR_BASE_PRICE
@@ -25,6 +29,12 @@ def calculate_children_amount(days_rented):
         amount += (days_rented - 3) * CHILDREN_EXTRA_DAYS_COST
     return amount
 
+def calculate_dubbed_amount(days_rented):
+    amount = DUBBED_BASE_PRICE
+    if days_rented > 1:
+        amount += (days_rented - 1) * DUBBED_EXTRA_DAYS_COST
+    return amount
+
 def calculate_amount(movie_price_code, days_rented):
     if movie_price_code == REGULAR_PRICE_CODE:
         return calculate_regular_amount(days_rented)
@@ -32,6 +42,8 @@ def calculate_amount(movie_price_code, days_rented):
         return calculate_new_release_amount(days_rented)
     elif movie_price_code == CHILDREN_PRICE_CODE:
         return calculate_children_amount(days_rented)
+    elif movie_price_code == DUBBED_PRICE_CODE:
+        return calculate_dubbed_amount(days_rented)
     else:
         return 0  # Handle unknown price code
 
