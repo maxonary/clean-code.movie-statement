@@ -42,6 +42,8 @@ def calculate_amount(movie_price_code, days_rented):
         return calculate_new_release_amount(days_rented)
     elif movie_price_code == CHILDREN_PRICE_CODE:
         return calculate_children_amount(days_rented)
+    elif movie_price_code == DUBBED_PRICE_CODE:
+        return calculate_dubbed_amount(days_rented)
     else:
         return 0  # Handle unknown price code
 
