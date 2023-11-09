@@ -36,16 +36,15 @@ def calculate_dubbed_amount(days_rented):
     return amount
 
 def calculate_amount(movie_price_code, days_rented):
-    if movie_price_code == REGULAR_PRICE_CODE:
-        return calculate_regular_amount(days_rented)
-    elif movie_price_code == NEW_RELEASE_PRICE_CODE:
-        return calculate_new_release_amount(days_rented)
-    elif movie_price_code == CHILDREN_PRICE_CODE:
-        return calculate_children_amount(days_rented)
-    elif movie_price_code == DUBBED_PRICE_CODE:
-        return calculate_dubbed_amount(days_rented)
-    else:
-        return 0  # Handle unknown price code
+    price_code_functions = {
+        REGULAR_PRICE_CODE: calculate_regular_amount,
+        NEW_RELEASE_PRICE_CODE: calculate_new_release_amount,
+        CHILDREN_PRICE_CODE: calculate_children_amount,
+        DUBBED_PRICE_CODE: calculate_dubbed_amount
+    }
+
+    calculation_function = price_code_functions.get(movie_price_code, lambda x: 0)
+    return calculation_function(days_rented)
 
 def generate_rental_statement(name, rentals):
     total_amount = 0
